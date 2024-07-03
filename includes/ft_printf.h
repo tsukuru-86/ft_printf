@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   digit.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 21:11:53 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/01 21:25:42 by tsukuru          ###   ########.fr       */
+/*   Created: 2024/07/01 20:54:12 by tsukuru           #+#    #+#             */
+/*   Updated: 2024/07/02 13:51:27 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.c"
+#ifndef FT_PRINTF_H
+#define FT_PRINTF_H
 
-char digit(va_list ap)
-{
-    int i = va_arg(ap, int);
-    char buffer[12];
-}
+#include <stdio.h>
+#include <unistd.h>
+#include <stdarg.h>
+
+int ft_printf(const char *str, ...);
+
+#endif /* FT_PRINTF_H */

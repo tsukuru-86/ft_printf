@@ -6,48 +6,41 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 08:50:25 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/01 20:58:27 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/03 17:24:46 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "includes/ft_printf.h"
+
+
 
 int ft_printf(const char *str, ...)
 {
+    int i;
+    int len;
     va_list ap;
+    if (!str)
+        return (0);
+    
+    i = 0;
+    len = 0;
     va_start(ap, str);
     
-    while (*str)
+    while (str[i])
     {
-        if (*str == '%')
+        if (str[i] == '%')
         {
-            str++;
-            switch (*str)
-            {
-                case 'd' : 
-                {
-                    別ファイルの関数呼び出し
-                }
-                case 's' :
-                {
-                    char *s = va_arg(ap, char);
-                    while (*s)
-                    {
-                        write (1, s, 1);
-                        s++;
-                    }
-                    break;
-                }
-            }
+            i++;
+            len += 関数名(str[i], ap);
         }else
         {
-            write(1, str, 1);
+            len += write(1, &str[i], 1);
         }
-        str++;
+        i++;
     }   
 
     va_end(ap);
-    return 0;
+    return (len);
 }
 
 int main(void)
