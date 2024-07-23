@@ -6,11 +6,11 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 09:50:20 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/05/23 10:09:24 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/10 22:17:16 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

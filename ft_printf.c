@@ -6,13 +6,36 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 08:50:25 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/03 17:24:46 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/23 06:56:01 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_printf.h"
 
-
+static int perform_conversion(char specifier, va_list ap)
+{
+    if (specifier == '%')
+        return write(1, "%", 1);
+    else if(specifier == 'c')
+    {
+        ft_putchar_fd(va_arg(ap, int), 1);
+        return (1);
+    }
+    else if(specifier == 'd' || specifier == 'i')
+        return (prt_int(va_arg(ap, int)));
+    else if(specifier == 's')
+        return (prt_str(va_arg(ap, char *)));
+    // else if(specifier == 'p')
+    //     return (prt_ptr(va_arg(ap, (void) *)));
+    else if(specifier == 'u')
+        return (prt_unsigned(va_arg(ap, unsigned int)));
+    // else if(specifier == 'x')
+    //     return (prt_hexa(va_arg(ap, ssize_t), false));
+    // else if(specifier == 'X')
+    //     return (prt_hexa(va_arg(ap, ssize_t), true));
+    else 
+        return (0);
+}
 
 int ft_printf(const char *str, ...)
 {
@@ -31,7 +54,7 @@ int ft_printf(const char *str, ...)
         if (str[i] == '%')
         {
             i++;
-            len += 関数名(str[i], ap);
+            len += perform_conversion(str[i], ap);
         }else
         {
             len += write(1, &str[i], 1);
@@ -41,12 +64,4 @@ int ft_printf(const char *str, ...)
 
     va_end(ap);
     return (len);
-}
-
-int main(void)
-{
-    int a;
-    scanf("%d", &a);
-    
-    ft_printf("こんにちは\n");
 }
