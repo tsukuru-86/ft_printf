@@ -6,7 +6,7 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 08:50:25 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/23 06:56:01 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/24 14:57:04 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int perform_conversion(char specifier, va_list ap)
         return (prt_int(va_arg(ap, int)));
     else if(specifier == 's')
         return (prt_str(va_arg(ap, char *)));
-    // else if(specifier == 'p')
-    //     return (prt_ptr(va_arg(ap, (void) *)));
+    else if(specifier == 'p')
+        return (prt_ptr(va_arg(ap, void *)));
     else if(specifier == 'u')
         return (prt_unsigned(va_arg(ap, unsigned int)));
     // else if(specifier == 'x')

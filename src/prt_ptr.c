@@ -1,46 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prt_unsigned.c                                     :+:      :+:    :+:   */
+/*   prt_ptr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 09:42:19 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/23 10:17:18 by tsukuru          ###   ########.fr       */
+/*   Created: 2024/07/24 12:19:42 by tsukuru           #+#    #+#             */
+/*   Updated: 2024/07/24 15:01:50 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int unsigned_len(unsigned int n)
+static size_t ptr_digits(unsigned long long n)
 {
     size_t digits;
+
     digits = 0;
 
-    if (n == 0)
-        return 1;
+    if(n == 0)
+       return 1;
     
-    while (n != 0)
+    while(n != 0)
     {
-        n /= 10;
-        digits += 1;
+        n /= 16;
+        digits++;
     }
     
     return digits;
 }
 
-void put_unsigned(unsigned int n)
+void put_ptr(unsigned long long adr)
 {
-    static char digits[] = "0123456789";
-    
-    if (n > 9)
-        put_unsigned(n / 10);
-    write(1, &digits[n % 10], 1);
+    static char digits[] = "0123456789abcdef";
+
+    if (adr >= 16)
+        put_ptr(adr / 16);
+    write(1, &digits[adr % 16], 1);
 }
 
-
-int prt_unsigned(unsigned int n)
+int	prt_ptr(void *adr)
 {
-    put_unsigned(n);
-    return ((unsigned_len(n)));
+    write(1, "0x", 2);
+    
+    put_ptr((unsigned long long)adr);
+    
+    return ptr_digits((unsigned long long)adr);
 }

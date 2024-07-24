@@ -6,7 +6,7 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:32:45 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/23 10:04:32 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/24 15:03:05 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 int main(void)
 {
-    int digits = 1;
+    // int digits = 1;
+    int a = 42;
+    int *ptr = &a;
+    ft_printf("ft_printfの%%p: %p\n", (void *)ptr);
+    printf("printfの%%p: %p\n", (void *)ptr);
         
-    ft_printf("こんにちは%s,%u年は飛躍の年にしましょう。\n", "Tsukuru", digits);
+    ft_printf("こんにちは%s,%u年は飛躍の年にしましょう。\n", "Tsukuru", 2024);
+
 }

@@ -6,7 +6,7 @@
 #    By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 03:15:33 by tsukuru           #+#    #+#              #
-#    Updated: 2024/07/23 10:02:28 by tsukuru          ###   ########.fr        #
+#    Updated: 2024/07/24 15:00:54 by tsukuru          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM = rm -rf
 NAME = libftprintf.a
 EXEC = my_program
 
-SRCS = ft_printf.c src/prt_str.c src/prt_int.c src/prt_unsigned.c main.c
+SRCS = ft_printf.c src/prt_str.c src/prt_int.c src/prt_unsigned.c src/prt_ptr.c main.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) $(EXEC)
