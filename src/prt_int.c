@@ -6,13 +6,13 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 21:11:53 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/23 06:53:14 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/24 18:10:34 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t len_digits(int n)
+static size_t int_digits(int n)
 {
     size_t digits;
     digits = 0;
@@ -50,7 +50,7 @@ int prt_int(int n)
 {
     int len;
     
-    len = len_digits(n);
+    len = int_digits(n);
     if (n == INT_MIN)
         return write(1, "-2147483648", 11);
     // // ft_putnbr_fd(len, 1);

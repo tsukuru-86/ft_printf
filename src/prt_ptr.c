@@ -6,7 +6,7 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 12:19:42 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/24 15:01:50 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/24 17:56:29 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t ptr_digits(unsigned long long n)
     return digits;
 }
 
-void put_ptr(unsigned long long adr)
+static void put_ptr(unsigned long long adr)
 {
     static char digits[] = "0123456789abcdef";
 

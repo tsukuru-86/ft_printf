@@ -6,7 +6,7 @@
 #    By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 03:15:33 by tsukuru           #+#    #+#              #
-#    Updated: 2024/07/24 15:00:54 by tsukuru          ###   ########.fr        #
+#    Updated: 2024/07/24 18:08:56 by tsukuru          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM = rm -rf
 NAME = libftprintf.a
 EXEC = my_program
 
-SRCS = ft_printf.c src/prt_str.c src/prt_int.c src/prt_unsigned.c src/prt_ptr.c main.c
+SRCS = ft_printf.c src/prt_str.c src/prt_int.c src/prt_unsigned.c src/prt_ptr.c src/prt_hexa.c main.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) $(EXEC)
@@ -37,10 +37,10 @@ run: $(EXEC)  # 実行ターゲットを追加
 	
 clean:
 	$(MAKE) clean -C ./libft
-	$(RM) $(OBJS) main.o $(EXEC)
+	$(RM) $(OBJS) main.o $(EXEC) src/a.out
 fclean: clean
 	$(MAKE) fclean -C ./libft
-	$(RM) $(NAME)
+	$(RM) $(NAME) src/a.out
 re: fclean all
 
 .PHONY: all clean fclean re
