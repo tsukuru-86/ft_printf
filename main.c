@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:32:45 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/25 10:30:14 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/25 21:08:47 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int main(void)
 {
-    // int digits = 1;
-    int a = 1;
+    int a = -2147483645 ;
     int *ptr = &a;
     ft_printf("ft_printfの%%p: %p\n", (void *)ptr);
     printf("printfの%%p: %p\n", (void *)ptr);

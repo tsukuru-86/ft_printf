@@ -11,20 +11,19 @@
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <limits.h>
-#include <stdbool.h> 
+# include "libft.h"
+# include <limits.h>
+# include <stdarg.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <unistd.h>
 
-
-int ft_printf(const char *str, ...);
-int prt_str(char const *str);
-int prt_int(int n);
-int prt_unsigned(unsigned int n);
+int	ft_printf(const char *str, ...);
+int	prt_str(char const *str);
+int	prt_int(int n);
+int	prt_unsigned(unsigned int n);
 int	prt_ptr(void *adr);
 int	prt_hexa(unsigned int nbr, bool upper_case);
 
