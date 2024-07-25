@@ -6,7 +6,7 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 08:50:25 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/24 18:06:37 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/25 10:12:59 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int perform_conversion(char specifier, va_list ap)
     else if(specifier == 'u')
         return (prt_unsigned(va_arg(ap, unsigned int)));
     else if(specifier == 'x')
-        return (prt_hexa(va_arg(ap, ssize_t), false));
+        return (prt_hexa(va_arg(ap, unsigned int), false));
     else if(specifier == 'X')
-        return (prt_hexa(va_arg(ap, ssize_t), true));
+        return (prt_hexa(va_arg(ap, unsigned int), true));
     else 
         return (0);
 }
@@ -53,8 +53,7 @@ int ft_printf(const char *str, ...)
     {
         if (str[i] == '%')
         {
-            i++;
-            len += perform_conversion(str[i], ap);
+            len += perform_conversion(str[i + 1], ap);
         }else
         {
             len += write(1, &str[i], 1);

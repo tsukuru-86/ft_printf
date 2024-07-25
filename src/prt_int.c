@@ -6,14 +6,21 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 21:11:53 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/24 18:10:34 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/25 10:25:35 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+// #include <stdio.h>
+// #include <unistd.h>
+// #include <stdarg.h>
+// #include <limits.h>
+// #include <stdbool.h> 
+
 static size_t int_digits(int n)
 {
+    printf("int_digits called with n = %d\n", n);
     size_t digits;
     digits = 0;
 
@@ -33,21 +40,23 @@ static size_t int_digits(int n)
 
 static void put_digits(int n)
 {
+    printf("put_digits called with n = %d\n", n);
     static char digits[] = "0123456789";
 
     if (n < 0)
     {
-        write(STDOUT_FILENO, "-", 1);  // 負の符号を出力
-        n = -n;  // 正の数に変換
+        write(1, "-", 1);
+        n = -n;
     }
     
     if (n > 9)
         put_digits(n / 10);
-    write(STDOUT_FILENO, &digits[n % 10], 1);
+    write(1, &digits[n % 10], 1);
 }
 
 int prt_int(int n)
 {
+    printf("prt_int called with n = %d\n", n); // デバッグ出力
     int len;
     
     len = int_digits(n);
@@ -58,3 +67,9 @@ int prt_int(int n)
 
     return (len);
 }
+
+// int main(void)
+// {
+//     int n = -22;
+//     prt_int(n);
+// }

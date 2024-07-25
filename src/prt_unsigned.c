@@ -6,7 +6,7 @@
 /*   By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 09:42:19 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/23 10:17:18 by tsukuru          ###   ########.fr       */
+/*   Updated: 2024/07/25 10:27:07 by tsukuru          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int unsigned_len(unsigned int n)
 
 void put_unsigned(unsigned int n)
 {
+    printf("put_unsigned called with n = %d\n", n);
     static char digits[] = "0123456789";
     
     if (n > 9)
@@ -41,6 +42,7 @@ void put_unsigned(unsigned int n)
 
 int prt_unsigned(unsigned int n)
 {
+    printf("prt_unsigned called with n = %d\n", n);
     put_unsigned(n);
     return ((unsigned_len(n)));
 }
