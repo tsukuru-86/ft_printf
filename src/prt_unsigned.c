@@ -6,7 +6,7 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 09:42:19 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/25 20:43:44 by tkomai           ###   ########.fr       */
+/*   Updated: 2024/08/21 19:13:36 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	put_unsigned(unsigned int n)
 int	prt_unsigned(unsigned int n)
 {
 	put_unsigned(n);
-	return ((unsigned_len(n)));
+	return (unsigned_len(n));
 }

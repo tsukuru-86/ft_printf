@@ -6,7 +6,7 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:54:33 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/25 21:28:25 by tkomai           ###   ########.fr       */
+/*   Updated: 2024/08/21 21:38:17 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ static size_t	hexa_digits(unsigned int n)
 {
 	size_t	digits;
 
-	digits = 1;
+	digits = 0;
 	if (n == 0)
-		return (0);
-	if (n >= 16)
+		return (1);
+	if (n < 0)
+		digits += 1;
+	while (n != 0)
 	{
 		n /= 16;
-		digits++;
+		digits += 1;
 	}
 	return (digits);
 }
