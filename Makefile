@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tsukuru <tsukuru@student.42.fr>            +#+  +:+       +#+         #
+#    By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 03:15:33 by tsukuru           #+#    #+#              #
-#    Updated: 2024/07/24 18:08:56 by tsukuru          ###   ########.fr        #
+#    Updated: 2024/08/26 23:41:02 by tkomai           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(EXEC): main.o
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
 
-run: $(EXEC)  # 実行ターゲットを追加
+run: $(EXEC)
 	./$(EXEC)
 	
 clean:

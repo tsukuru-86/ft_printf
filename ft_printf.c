@@ -6,7 +6,7 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 08:50:25 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/25 21:28:09 by tkomai           ###   ########.fr       */
+/*   Updated: 2024/08/26 23:37:18 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static int	perform_conversion(char specifier, va_list ap)
 	else if (specifier == 'u')
 		return (prt_unsigned(va_arg(ap, unsigned int)));
 	else if (specifier == 'x' || specifier == 'X')
+	{
 		num = va_arg(ap, unsigned int);
-	return (prt_hexa(num, specifier == 'X'));
+		return (prt_hexa(num, specifier == 'X'));
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:54:33 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/08/21 21:38:17 by tkomai           ###   ########.fr       */
+/*   Updated: 2024/08/27 04:18:51 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,4 @@ int	prt_hexa(unsigned int nbr, bool upper_case)
 	put_hexa(nbr, upper_case);
 	return (hexa_digits(nbr));
 }
+
