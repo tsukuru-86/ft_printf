@@ -47,4 +47,3 @@ int	prt_hexa(unsigned int nbr, bool upper_case)
 	put_hexa(nbr, upper_case);
 	return (hexa_digits(nbr));
 }
-
