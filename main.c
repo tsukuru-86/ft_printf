@@ -6,11 +6,12 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:32:45 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/08/27 04:17:00 by tkomai           ###   ########.fr       */
+/*   Updated: 2024/09/09 20:50:01 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.c"
+
 
 int main(void)
 {
@@ -63,5 +64,12 @@ int main(void)
 
     ft_printf("Simple hex: %x\n", 0xABCD);
     printf("Simple hex: %x\n", 0xABCD);
+
+    void *ptr2 = NULL;
+    ft_printf("%p\n", (void *)ptr2);
+    printf("%p\n", (void *)ptr2);
+    printf("%d\n",ft_printf("%p", (void *)ptr2));
+    printf("%d\n",printf("%p", (void *)ptr2));
+
 
 }
