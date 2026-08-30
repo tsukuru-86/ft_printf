@@ -1,2 +1,6 @@
-.gitignore
 .DS_Store
+*.a
+*.o
+.mandatory
+.bonus
+libft_printf/

@@ -6,16 +6,23 @@
 /*   By: tkomai <tkomai@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:42:00 by tsukuru           #+#    #+#             */
-/*   Updated: 2024/07/25 19:31:35 by tkomai           ###   ########.fr       */
+/*   Updated: 2026/08/26 00:00:00 by tkomai           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	prt_str(char const *str)
+int	prt_char(int c)
 {
-	if (str == NULL)
-		return (write(1, "(null)", 6));
-	else
-		return (write(1, str, ft_strlen(str)));
+	char	character;
+
+	character = (char)c;
+	return (pf_write(&character, 1));
+}
+
+int	prt_str(const char *str)
+{
+	if (!str)
+		return (pf_write("(null)", 6));
+	return (pf_write(str, pf_strlen(str)));
 }
