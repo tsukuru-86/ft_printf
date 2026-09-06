@@ -7,8 +7,12 @@ int	main(void)
 {
 	int	standard;
 	int	mine;
+	int	flag_score;
+	int	flag_total;
 
 	setbuf(stdout, NULL);
+	flag_score = 0;
+	flag_total = 3;
 
 	/* INT_MIN を %d で表示 */
 	printf("\nINT_MIN を %%d で表示\n");
@@ -17,6 +21,36 @@ int	main(void)
 	printf("ft_printf: ");
 	mine = ft_printf("|%d|\n", INT_MIN);
 	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* # フラグ：16進数に 0x / 0X を付ける */
+	printf("\n# フラグ：%%#x・%%#X\n");
+	printf("   printf: ");
+	standard = printf("|%#x| |%#X|\n", 42, 42);
+	printf("ft_printf: ");
+	mine = ft_printf("|%#x| |%#X|\n", 42, 42);
+	flag_score += standard == mine;
+	printf("return: printf=%d, ft_printf=%d [%s] (1点)\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* + フラグ：正の数に + を付ける */
+	printf("\n+ フラグ：%%+d\n");
+	printf("   printf: ");
+	standard = printf("|%+d| |%+d|\n", 42, -42);
+	printf("ft_printf: ");
+	mine = ft_printf("|%+d| |%+d|\n", 42, -42);
+	flag_score += standard == mine;
+	printf("return: printf=%d, ft_printf=%d [%s] (1点)\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* スペースフラグ：正の数に空白を付ける */
+	printf("\nスペースフラグ：%% d\n");
+	printf("   printf: ");
+	standard = printf("|% d| |% d|\n", 42, -42);
+	printf("ft_printf: ");
+	mine = ft_printf("|% d| |% d|\n", 42, -42);
+	flag_score += standard == mine;
+	printf("return: printf=%d, ft_printf=%d [%s] (1点)\n",
 		standard, mine, standard == mine ? "OK" : "NG");
 
 	/* - フラグ：幅 4・8・12（自由に変更OK） */
@@ -64,5 +98,6 @@ int	main(void)
 	printf("return: printf=%d, ft_printf=%d [%s]\n",
 		standard, mine, standard == mine ? "OK" : "NG");
 
+	printf("\nフラグ得点：%d/%d 点\n", flag_score, flag_total);
 	return (0);
 }

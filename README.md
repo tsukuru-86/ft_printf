@@ -45,7 +45,8 @@ The other available Makefile rules are `clean`, `fclean`, and `re`.
 
 Two simple local test programs print `printf()` and `ft_printf()` results
 on adjacent lines. Compare the output visually; `OK` / `NG` checks only the
-return values. The `|` characters make padding spaces visible.
+return values. The bonus test also gives one point each for `#`, `+`, and the
+space flag. The `|` characters make padding spaces visible.
 
 Basic conversions:
 
