@@ -41,6 +41,14 @@ cc -Wall -Wextra -Werror main.c -Iincludes libftprintf.a
 
 The other available Makefile rules are `clean`, `fclean`, and `re`.
 
+## Testing
+
+`test_bonus.c` is an optional local differential test program. It compares
+the output and return value of `ft_printf()` with the system `printf()`.
+It is included in this repository for development and verification, but it is
+not part of the ft_printf assignment deliverables and must not be submitted
+as the subject's required source files.
+
 ## Supported behavior
 
 - `%c`: character
