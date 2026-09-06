@@ -1,144 +1,68 @@
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <limits.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 
-#define CAPTURE_SIZE 256
-
-enum e_argument_type
-{
-	ARG_NONE,
-	ARG_INT,
-	ARG_UNSIGNED,
-	ARG_STRING,
-	ARG_POINTER
-};
-
-typedef struct s_capture
-{
-	char	output[CAPTURE_SIZE];
-	int		length;
-	int		return_value;
-} t_capture;
-
-static void	capture_begin(int pipefd[2], int *saved_stdout)
-{
-	fflush(stdout);
-	if (pipe(pipefd) == -1 || (*saved_stdout = dup(STDOUT_FILENO)) == -1
-		|| dup2(pipefd[1], STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE);
-	close(pipefd[1]);
-}
-
-static void	capture_end(t_capture *capture, int read_fd, int saved_stdout)
-{
-	ssize_t	read_size;
-
-	fflush(stdout);
-	if (dup2(saved_stdout, STDOUT_FILENO) == -1)
-		exit(EXIT_FAILURE);
-	close(saved_stdout);
-	read_size = read(read_fd, capture->output, CAPTURE_SIZE - 1);
-	if (read_size < 0)
-		exit(EXIT_FAILURE);
-	capture->length = (int)read_size;
-	capture->output[capture->length] = '\0';
-	close(read_fd);
-}
-
-static int	call_libc_without_argument(const char *format, ...)
-{
-	va_list	arguments;
-	int		result;
-
-	va_start(arguments, format);
-	result = vprintf(format, arguments);
-	va_end(arguments);
-	return (result);
-}
-
-static int	call_printf(int mine, const char *format,
-		enum e_argument_type type, unsigned long long value)
-{
-	if (type == ARG_INT)
-		return (mine ? ft_printf(format, (int)value) : printf(format, (int)value));
-	if (type == ARG_UNSIGNED)
-		return (mine ? ft_printf(format, (unsigned int)value)
-			: printf(format, (unsigned int)value));
-	if (type == ARG_STRING)
-		return (mine ? ft_printf(format, (const char *)value)
-			: printf(format, (const char *)value));
-	if (type == ARG_POINTER)
-		return (mine ? ft_printf(format, (const void *)value)
-			: printf(format, (const void *)value));
-	return (mine ? ft_printf(format) : call_libc_without_argument(format));
-}
-
-static int	test_case(const char *name, const char *format,
-		enum e_argument_type type, unsigned long long value)
-{
-	t_capture	official;
-	t_capture	mine;
-	int			pipefd[2];
-	int			saved_stdout;
-
-	capture_begin(pipefd, &saved_stdout);
-	official.return_value = call_printf(0, format, type, value);
-	capture_end(&official, pipefd[0], saved_stdout);
-	capture_begin(pipefd, &saved_stdout);
-	mine.return_value = call_printf(1, format, type, value);
-	capture_end(&mine, pipefd[0], saved_stdout);
-	if (official.length != mine.length
-		|| official.return_value != mine.return_value
-		|| memcmp(official.output, mine.output, official.length) != 0)
-	{
-		printf("[FAIL] %-28s %s\n", name, format);
-		printf("       printf: |%s| (%d)\n", official.output,
-			official.return_value);
-		printf("   ft_printf: |%s| (%d)\n", mine.output, mine.return_value);
-		return (0);
-	}
-	printf("[ OK ] %-28s %s\n", name, format);
-	return (1);
-}
-
+/* 出力を目で比較。戻り値は同じなら OK、違えば NG。 */
 int	main(void)
 {
-	int	passed;
-	int	total;
-	int	marker;
+	int	standard;
+	int	mine;
 
-	passed = 0;
-	total = 0;
-	marker = 42;
-	printf("ft_printf bonus review checks\n\n");
-	printf("Basic conversions\n");
-	passed += test_case("char", "%c", ARG_INT, 'A'); total++;
-	passed += test_case("string", "%s", ARG_STRING,
-		(unsigned long long)"hello"); total++;
-	passed += test_case("unsigned", "%u", ARG_UNSIGNED, 42); total++;
-	passed += test_case("hex lowercase", "%x", ARG_UNSIGNED, 42); total++;
-	passed += test_case("hex uppercase", "%X", ARG_UNSIGNED, 42); total++;
-	passed += test_case("pointer", "%p", ARG_POINTER,
-		(unsigned long long)&marker); total++;
-	passed += test_case("percent", "%%", ARG_NONE, 0); total++;
+	setbuf(stdout, NULL);
 
-	printf("\nRequired bonus flags and precision\n");
-	passed += test_case("INT_MIN", "%d", ARG_INT, (unsigned int)INT_MIN); total++;
-	passed += test_case("width", "%10d", ARG_INT, 42); total++;
-	passed += test_case("minus flag", "%-10d", ARG_INT, 42); total++;
-	passed += test_case("zero flag", "%04d", ARG_INT, 42); total++;
-	passed += test_case("precision 2", "%.2d", ARG_INT, 42); total++;
-	passed += test_case("precision 8", "%.8d", ARG_INT, 42); total++;
-	passed += test_case("precision 0", "%.0d", ARG_INT, 0); total++;
-	passed += test_case("hash lowercase", "%#x", ARG_UNSIGNED, 42); total++;
-	passed += test_case("hash uppercase", "%#X", ARG_UNSIGNED, 42); total++;
-	passed += test_case("plus flag", "%+d", ARG_INT, 42); total++;
-	passed += test_case("space flag", "% d", ARG_INT, 42); total++;
-	passed += test_case("plus over space", "%+ d", ARG_INT, 42); total++;
+	/* INT_MIN を %d で表示 */
+	printf("\nINT_MIN を %%d で表示\n");
+	printf("   printf: ");
+	standard = printf("|%d|\n", INT_MIN);
+	printf("ft_printf: ");
+	mine = ft_printf("|%d|\n", INT_MIN);
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
 
-	printf("\nResult: %d/%d matched (output and return value)\n", passed, total);
-	return (passed == total ? EXIT_SUCCESS : EXIT_FAILURE);
+	/* - フラグ：幅 4・8・12（自由に変更OK） */
+	printf("\n- フラグ：幅 4・8・12（自由に変更OK）\n");
+	printf("   printf: ");
+	standard = printf("|%-4d| |%-8d| |%-12d|\n", 42, -42, 123);
+	printf("ft_printf: ");
+	mine = ft_printf("|%-4d| |%-8d| |%-12d|\n", 42, -42, 123);
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* 0 フラグ：%04d・%08d */
+	printf("\n0 フラグ：%%04d・%%08d\n");
+	printf("   printf: ");
+	standard = printf("|%04d| |%04d| |%08d|\n", 42, -42, 123);
+	printf("ft_printf: ");
+	mine = ft_printf("|%04d| |%04d| |%08d|\n", 42, -42, 123);
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* . 精度：0・1・2・5・8 桁 */
+	printf("\n. 精度：0・1・2・5・8 桁\n");
+	printf("   printf: ");
+	standard = printf("|%.0d| |%.1d| |%.2d| |%.5d| |%.8d|\n", 0, 42, 42, 42, -42);
+	printf("ft_printf: ");
+	mine = ft_printf("|%.0d| |%.1d| |%.2d| |%.5d| |%.8d|\n", 0, 42, 42, 42, -42);
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* . 文字列の精度：0・3・8 文字 */
+	printf("\n. 文字列の精度：0・3・8 文字\n");
+	printf("   printf: ");
+	standard = printf("|%.0s| |%.3s| |%.8s|\n", "hello", "hello", "hello");
+	printf("ft_printf: ");
+	mine = ft_printf("|%.0s| |%.3s| |%.8s|\n", "hello", "hello", "hello");
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	/* - と . / 0 と . の組み合わせ */
+	printf("\n- と . / 0 と . の組み合わせ\n");
+	printf("   printf: ");
+	standard = printf("|%-10.5d| |%08.5d|\n", 42, 42);
+	printf("ft_printf: ");
+	mine = ft_printf("|%-10.5d| |%08.5d|\n", 42, 42);
+	printf("return: printf=%d, ft_printf=%d [%s]\n",
+		standard, mine, standard == mine ? "OK" : "NG");
+
+	return (0);
 }

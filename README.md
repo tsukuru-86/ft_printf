@@ -43,11 +43,28 @@ The other available Makefile rules are `clean`, `fclean`, and `re`.
 
 ## Testing
 
-`test_bonus.c` is an optional local differential test program. It compares
-the output and return value of `ft_printf()` with the system `printf()`.
-It is included in this repository for development and verification, but it is
-not part of the ft_printf assignment deliverables and must not be submitted
-as the subject's required source files.
+Two simple local test programs print `printf()` and `ft_printf()` results
+on adjacent lines. Compare the output visually; `OK` / `NG` checks only the
+return values. The `|` characters make padding spaces visible.
+
+Basic conversions:
+
+```sh
+make
+cc -Wall -Wextra -Werror test_basic.c -Iincludes libftprintf.a -o test_basic
+./test_basic
+```
+
+Bonus (`INT_MIN`, `-`, `0`, and multiple precisions):
+
+```sh
+make bonus
+cc -Wall -Wextra -Werror test_bonus.c -Iincludes libftprintf.a -o test_bonus
+./test_bonus
+```
+
+Edit the literal widths, precisions, or values in either file to try other
+cases. These files are for local testing, not assignment submission.
 
 ## Supported behavior
 
