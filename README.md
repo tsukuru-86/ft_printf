@@ -57,6 +57,7 @@ as the subject's required source files.
 - `%d`, `%i`: signed decimal integer
 - `%u`: unsigned decimal integer
 - `%x`, `%X`: lowercase or uppercase hexadecimal integer
+- `%a`: project-specific fixed text (`my awesome 42`)
 - `%%`: percent sign
 - Bonus: field width, precision, and the `-`, `0`, `#`, space, and `+` flags
 

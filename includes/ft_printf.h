@@ -34,6 +34,7 @@ int		prt_int(int n);
 int		prt_unsigned(unsigned int n);
 int		prt_ptr(const void *address);
 int		prt_hexa(unsigned int number, int uppercase);
+int		prt_custom(void);
 int		pf_write(const char *str, size_t length);
 int		pf_putnbr_base(unsigned long long number, const char *base,
 			unsigned int radix);

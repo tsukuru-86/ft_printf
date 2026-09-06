@@ -28,6 +28,8 @@ static int	print_conversion(t_pf_format *options, va_list *arguments)
 		|| options->conversion == 'X')
 		return (pf_print_unsigned_bonus(options,
 				va_arg(*arguments, unsigned int)));
+	if (options->conversion == 'a')
+		return (prt_custom());
 	if (options->conversion == '%')
 		return (pf_print_percent_bonus(options));
 	return (-1);

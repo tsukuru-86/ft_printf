@@ -64,7 +64,8 @@ static int	valid_conversion(char conversion)
 {
 	return (conversion == 'c' || conversion == 's' || conversion == 'p'
 		|| conversion == 'd' || conversion == 'i' || conversion == 'u'
-		|| conversion == 'x' || conversion == 'X' || conversion == '%');
+		|| conversion == 'x' || conversion == 'X' || conversion == 'a'
+		|| conversion == '%');
 }
 
 int	pf_parse_format_bonus(const char **format, t_pf_format *options)

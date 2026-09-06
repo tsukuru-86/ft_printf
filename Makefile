@@ -23,7 +23,8 @@ MANDATORY_SRCS = ft_printf.c \
 			src/prt_int.c \
 			src/prt_unsigned.c \
 			src/prt_ptr.c \
-			src/prt_hexa.c
+			src/prt_hexa.c \
+			src/prt_custom.c
 
 BONUS_SRCS = ft_printf_bonus.c \
 			src/prt_utils.c \
@@ -31,7 +32,8 @@ BONUS_SRCS = ft_printf_bonus.c \
 			src/format_utils_bonus.c \
 			src/text_output_bonus.c \
 			src/number_format_bonus.c \
-			src/number_output_bonus.c
+			src/number_output_bonus.c \
+			src/prt_custom.c
 
 MANDATORY_OBJS = $(MANDATORY_SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

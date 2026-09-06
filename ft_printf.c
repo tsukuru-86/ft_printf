@@ -27,6 +27,8 @@ static int	print_conversion(char conversion, va_list *arguments)
 	if (conversion == 'x' || conversion == 'X')
 		return (prt_hexa(va_arg(*arguments, unsigned int),
 				conversion == 'X'));
+	if (conversion == 'a')
+		return (prt_custom());
 	if (conversion == '%')
 		return (pf_write("%", 1));
 	return (-1);
